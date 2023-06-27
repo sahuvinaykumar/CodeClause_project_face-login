@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Face Lock</title>
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+   <link rel="stylesheet" href="face_login_style.css">
+</head>
+<body>
+   <footer class="footer bg-dark text-light fixed-bottom p-2 fs-5 text-center">@ Vinay Kumar Sahu</footer>
+
+
+
+	<div class="container jumbotron">
+		<div class="row">
+			<div class="col-md-6">
+				<h1>Signup</h1>
+
+                <form>
+					<div class="form-group">
+						<input type="email" name="email" class="form-control" placeholder="*email" required>
+					</div>
+
+					<div class="form-group">
+						<input type="text" name="username" class="form-control" placeholder="*username" required>
+					</div>
+					<div class="form-group">
+						<input type="password" name="password" class="form-control" placeholder="*password" required>
+					</div>
+					<div class="form-group">
+						<input type="password" name="c_password" class="form-control" placeholder="*confirm password" required>
+					</div>
+					<div class="form-group">
+                  <label for="pic">*Upload Your Image</label>
+						<input type="file" name="pic" class="form-control" required>
+					</div>
+               <button class="btn-dark form-control" value="login">Signup </button>
+               <!-- <input type="submit" class="form-control"> -->
+
+
+				</form>
+
+			</div>
+            <div class="container text-center bordered" style="width:280px; margin-top:50px;">
+                <form action="login.py" method="post" enctype="multipart/form-data">
+                <video onclick="snapshot(this);" width=250 height=250 id="video" controls autoplay></video>
+                <br>
+                <input type="text" placeholder="Username" name="email" class="form-control form-control-sm text-left">
+                <br>
+                <input type="text" accept="image/png" hidden name="current_image" id="current_image">
+                   <button  onclick="login()" class="btn-dark" value="login">Login </button>
+                   <br>
+                   <br>
+                </form>
+            </div>
+                  <canvas  id="myCanvas" width="400" height="350" hidden></canvas>  
+              </body>
+              <script>
+
+                      navigator.getUserMedia = ( navigator.getUserMedia ||
+                                         navigator.webkitGetUserMedia ||
+                                         navigator.mozGetUserMedia ||
+                                         navigator.msGetUserMedia);
+
+                  var video;
+                  var webcamStream;
+                    if (navigator.getUserMedia) {
+                       navigator.getUserMedia (
+
+
+                          {
+                             video: true,
+                             audio: false
+                          },
+
+
+                          function(localMediaStream) {
+                              video = document.querySelector('video');
+                             video.srcObject = localMediaStream;
+                             webcamStream = localMediaStream;
+                          },
+
+
+                          function(err) {
+                             console.log("The following error occured: " + err);
+                          }
+                       );
+                    } else {
+                       console.log("getUserMedia not supported");
+                    }  
+
+
+
+                  var canvas, ctx;
+
+                  function init() {
+
+            mcanvas = document.getElementById("myCanvas");
+                    ctx = mcanvas.getContext('2d');
+                  }
+
+                  function login() {
+
+                    ctx.drawImage(video,0,0,mcanvas.width,mcanvas.height);
+                    var dataURL = mcanvas.toDataURL('image/png');
+                     document.getElementById("current_image").value=dataURL;
+
+                  }
+
+              </script>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+   <br>
+
+   
+    <script type="text/javascript" src="myjs.js"></script>
+    <script type="text/javascript" src="jsmain.js"></script>
+</body>
+</html>
